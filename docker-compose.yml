@@ -1,6 +1,7 @@
 services:
   backend:
-    container_name: fhjibon/voiceagent-backend
+    image: fhjibon/voiceagent-backend:latest
+    container_name: voiceagent-backend
     environment:
       GEMINI_API_KEY: ${GEMINI_API_KEY}
       DB_ADMIN_USERNAME: ${DB_ADMIN_USERNAME}
@@ -14,7 +15,8 @@ services:
     restart: unless-stopped
 
   frontend:
-    container_name: fhjibon/voiceagent-frontend
+    image: fhjibon/voiceagent-frontend:latest
+    container_name: voiceagent-frontend
     environment:
       NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL}
     ports:

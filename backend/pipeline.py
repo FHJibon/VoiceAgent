@@ -1,9 +1,8 @@
 import os
 import asyncio
-import json
 import logging
 import uuid
-from typing import AsyncGenerator, Dict, Any
+from typing import Dict, Any
 from fastapi import WebSocket
 from dotenv import load_dotenv
 from database import db
@@ -13,8 +12,11 @@ load_dotenv()
 from pipecat.pipeline.pipeline import Pipeline
 from pipecat.pipeline.runner import PipelineRunner
 from pipecat.pipeline.task import PipelineTask
-from pipecat.frames.frames import Frame, AudioRawFrame, TextFrame, EndFrame
-from pipecat.services.google.gemini_live import GeminiLiveLLMService
+from pipecat.frames.frames import Frame, TextFrame
+try:
+    from pipecat.services.google.gemini_live.llm import GeminiLiveLLMService
+except ImportError:
+    from pipecat.services.google.gemini_live import GeminiLiveLLMService
 from pipecat.processors.frame_processor import FrameDirection, FrameProcessor
 
 logging.basicConfig(level=logging.INFO)

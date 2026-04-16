@@ -34,6 +34,7 @@ export default function Home() {
   const [recognition, setRecognition] = useState<any>(null);
 
   const wsRef = useRef<WebSocket | null>(null);
+  const hasShownWelcomeRef = useRef<boolean>(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -108,7 +109,8 @@ export default function Home() {
   const connectWebSocket = () => {
     try {
       setConnectionStatus('connecting');
-      const ws = new WebSocket('ws://localhost:8000/ws');
+      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws';
+      const ws = new WebSocket(wsUrl);
       
       ws.onopen = () => {
         console.log('Connected to WebSocket');
@@ -130,13 +132,16 @@ export default function Home() {
           // Handle different message types from backend
           if (data.type === 'welcome') {
             const welcomeMessage = "Hello! I'll collect your name, phone number, and job title. Can you please provide your information?";
-            setChatHistory(prev => [...prev, {
-              type: 'assistant',
-              message: welcomeMessage,
-              timestamp: new Date()
-            }]);
-            // Speak the welcome message
-            setTimeout(() => speakText(welcomeMessage), 500);
+            if (!hasShownWelcomeRef.current) {
+              hasShownWelcomeRef.current = true;
+              setChatHistory(prev => [...prev, {
+                type: 'assistant',
+                message: welcomeMessage,
+                timestamp: new Date()
+              }]);
+              // Speak the welcome message only once per page session.
+              setTimeout(() => speakText(welcomeMessage), 500);
+            }
           } else if (data.type === 'chat_response') {
             if (data.user_message) {
               setChatHistory(prev => [...prev, {

@@ -3,5 +3,4 @@ uvicorn[standard]
 pipecat-ai[google]
 python-dotenv
 websockets
-python-dotenv
 aiofiles

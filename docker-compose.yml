@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: fhjibon/voiceagent-backend
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      DB_ADMIN_USERNAME: ${DB_ADMIN_USERNAME}
+      DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
+      DB_PATH: /app/data/user_data.db
+      FRONTEND_ORIGINS: ${FRONTEND_ORIGINS}
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend-data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    container_name: fhjibon/voiceagent-frontend
+    environment:
+      NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-data:

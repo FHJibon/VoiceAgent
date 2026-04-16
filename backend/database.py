@@ -1,6 +1,5 @@
 import sqlite3
 import json
-from datetime import datetime
 from typing import Optional, List, Dict, Any
 import os
 
@@ -199,12 +198,13 @@ class UserDatabase:
     def get_recent_users(self, days: int = 7) -> List[Dict[str, Any]]:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
+            lookback = f"-{days} days"
             cursor.execute('''
                 SELECT id, name, phone, job_title, created_at, updated_at, session_data
                 FROM users 
-                WHERE created_at >= datetime('now', '-{} days')
+                WHERE created_at >= datetime('now', ?)
                 ORDER BY created_at DESC
-            '''.format(days))
+            ''', (lookback,))
             
             rows = cursor.fetchall()
             users = []
@@ -220,4 +220,10 @@ class UserDatabase:
                 })
             return users
 
-db = UserDatabase()
+    def get_form_session_count(self) -> int:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT COUNT(*) FROM form_sessions')
+            return cursor.fetchone()[0]
+
+db = UserDatabase(os.getenv("DB_PATH", "user_data.db"))

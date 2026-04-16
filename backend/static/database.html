@@ -29,7 +29,7 @@
         </div>
 
         <div class="controls">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search users by name, email, phone...">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search users by name, phone, job title...">
             <button class="btn btn-primary" onclick="loadUsers()">
                 Refresh
             </button>
@@ -100,7 +100,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Phone</th>
                             <th>Job Title</th>
                             <th>Registered</th>
@@ -115,7 +114,6 @@
                     <tr>
                         <td><span class="user-id">#${user.id}</span></td>
                         <td><span class="user-name">${user.name || 'N/A'}</span></td>
-                        <td>${user.email || 'N/A'}</td>
                         <td><span class="phone">${user.phone || 'N/A'}</span></td>
                         <td><span class="job-title">${user.job_title || 'N/A'}</span></td>
                         <td><span class="date-time">${registeredDate}</span></td>
@@ -142,7 +140,6 @@
             const filteredUsers = allUsers.filter(user => {
                 return (
                     (user.name && user.name.toLowerCase().includes(searchTerm)) ||
-                    (user.email && user.email.toLowerCase().includes(searchTerm)) ||
                     (user.phone && user.phone.toLowerCase().includes(searchTerm)) ||
                     (user.job_title && user.job_title.toLowerCase().includes(searchTerm))
                 );
@@ -162,14 +159,13 @@
         }
         
         function convertToCSV(data) {
-            const headers = ['ID', 'Name', 'Email', 'Phone', 'Job Title', 'Created At'];
+            const headers = ['ID', 'Name', 'Phone', 'Job Title', 'Created At'];
             const csvHeaders = headers.join(',');
             
             const csvRows = data.map(user => {
                 return [
                     user.id,
                     `"${user.name || ''}"`,
-                    `"${user.email || ''}"`,
                     `"${user.phone || ''}"`,
                     `"${user.job_title || ''}"`,
                     `"${user.created_at || ''}"`

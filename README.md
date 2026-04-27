@@ -57,8 +57,6 @@ Create a root `.env` file from `.env.example` and set your Gemini key:
 GEMINI_API_KEY=your_real_key
 DB_ADMIN_USERNAME=admin
 DB_ADMIN_PASSWORD=change-me
-FRONTEND_ORIGINS=http://localhost:3000,https://voiceagent.optovex.com
-NEXT_PUBLIC_WS_URL=ws://YOUR_GCLOUD_EXTERNAL_IP:8000/ws
 ```
 
 ### 2. Build and run all services

@@ -38,7 +38,11 @@ export const getWebSocketUrl = (): string => {
     }
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.hostname;
-    return `${protocol}//${host}:8000/ws`;
+    const isIpOrLocalhost = host === 'localhost' || host === '127.0.0.1';
+    if (isIpOrLocalhost) {
+      return `${protocol}//${host}:8000/ws`;
+    }
+    return `${protocol}//${host}/ws`;
   }
   return envUrl || 'ws://localhost:8000/ws';
 };

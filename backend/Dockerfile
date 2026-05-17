@@ -24,7 +24,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 COPY --from=builder /install /usr/local
+
 COPY . .
+
+RUN mkdir -p static data
 
 EXPOSE 8000
 

@@ -1,62 +1,29 @@
 
-## ⚡ Quick Start 
-
-### 1. Clone & Setup Backend Environment
-```bash
-cd Backend
-python -m venv .venv
-```
-```bash
-.venv\Scripts\activate
-```
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Configure Environment Variables
-
-Create a `.env` file in the `Backend` directory:
-
-```env
-GEMINI_API_KEY=
-DB_ADMIN_USERNAME=admin
-DB_ADMIN_PASSWORD=change-me
-```
-
-### 3. Setup Frontend Environment
-```bash
-cd ../Frontend
-npm install
-```
-
-### 4. Start Backend Server
-```bash
-cd ../Backend
-.venv\Scripts\activate
-uvicorn main:app --reload
-```
-
-### 5. Start Frontend Development Server
-```bash
-cd ../Frontend
-npm run dev
-```
-
-**Frontend : http://localhost:3000**  
-**Backend  : http://127.0.0.1:8000**  
-**Database : http://127.0.0.1:8000/database**  
-**API      : http://127.0.0.1:8000/docs**  
-
-## Docker Deployment
+##  Quick Start 
 
 ### 1. Set environment variable
 
-Create a root `.env` file from `.env.example` and set your Gemini key:
+Create a `backend/.env` file and set all of those:
 
 ```env
-GEMINI_API_KEY=your_real_key
-DB_ADMIN_USERNAME=admin
-DB_ADMIN_PASSWORD=change-me
+GEMINI_API_KEY=
+DB_ADMIN_USERNAME=
+DB_ADMIN_PASSWORD=
+VERTEX_MODEL=
+GCP_PROJECT_ID=
+GCP_LOCATION=
+GOOGLE_SERVICE_ACCOUNT_JSON=
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+```
+
+Create a `frontend/.env` file and set all of those:
+
+```env
+NEXT_PUBLIC_WS_URL=
 ```
 
 ### 2. Build and run all services
@@ -65,15 +32,10 @@ DB_ADMIN_PASSWORD=change-me
 docker compose up --build -d
 ```
 
-### 3. Open services
-
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:8000`
-- API Docs: `http://localhost:8000/docs`
-- Database UI: `http://localhost:8000/database`
-
-### 4. Stop services
+### 3. Stop services
 
 ```bash
 docker compose down
 ```
+
+**Admin : http://127.0.0.1:3000/admin**  

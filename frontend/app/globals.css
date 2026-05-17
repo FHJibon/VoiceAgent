@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=General+Sans:wght@400;500&family=Cabinet+Grotesk:wght@800&display=swap");
 @import "tailwindcss";
 
 @layer base {
@@ -6,20 +7,62 @@
   }
   
   :root {
-    --background: #ffffff;
-    --foreground: #374151;
+    --bg-color: #ffffff;
+    --text-main: #0a0a0a;
+    --text-muted: #6b7280;
+    --accent: #000000;
+    --card-bg: #f9fafb;
   }
   
   body {
-    background: #f9fafb;
-    color: #374151;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: "General Sans", sans-serif;
+    overflow: hidden;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Cabinet Grotesk", sans-serif;
+  }
+
+  .mono {
+    font-family: "Geist Mono", monospace;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #d1d5db;
+  }
+
+  
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 }
 
 @layer components {
-  /* Clean, minimal card styling */
+  
   .glass-card {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -28,7 +71,7 @@
   }
   
   .glass-button {
-    background: #10a37f;
+    background: #3b82f6;
     border: none;
     border-radius: 0.75rem;
     color: white;
@@ -38,13 +81,13 @@
   }
   
   .glass-button:hover {
-    background: #0d8968;
-    box-shadow: 0 4px 12px -2px rgba(16, 163, 127, 0.3);
+    background: #2563eb;
+    box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.3);
     transform: translateY(-1px);
   }
   
   .glass-button:active {
-    background: #0d8968;
+    background: #2563eb;
     transform: translateY(0);
   }
   
@@ -57,7 +100,7 @@
     background: #dc2626;
   }
   
-  /* Clean background and text */
+  
   .gradient-bg {
     background: #f9fafb;
   }
@@ -67,7 +110,7 @@
     font-weight: 600;
   }
   
-  /* Voice status indicator */
+  
   .status-dot {
     width: 8px;
     height: 8px;
@@ -90,14 +133,14 @@
     background: #9ca3af;
   }
   
-  /* Audio visualizer */
+  
   .audio-bar {
-    background: #10a37f;
+    background: #3b82f6;
     border-radius: 2px;
     transition: height 0.1s ease;
   }
   
-  /* Response bubble */
+  
   .response-bubble {
     background: #f3f4f6;
     border: 1px solid #e5e7eb;
@@ -107,11 +150,41 @@
   }
   
   .user-bubble {
-    background: #10a37f;
+    background: #3b82f6;
     color: white;
     border-radius: 1rem;
     padding: 1rem;
     margin: 0.5rem 0;
+  }
+}
+
+@layer utilities {
+  
+  @keyframes slideInUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-slide-in {
+    animation: slideInUp 0.4s ease-out forwards;
+  }
+
+  .animate-zoom-in {
+    animation: zoomIn 0.3s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
   }
 }
 

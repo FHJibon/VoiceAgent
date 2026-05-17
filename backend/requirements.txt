@@ -1,6 +1,8 @@
+google-generativeai
 fastapi
 uvicorn[standard]
 pipecat-ai[google]
 python-dotenv
 websockets
 aiofiles
+psycopg2-binary

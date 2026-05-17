@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { getWebSocketUrl } from '../utils/config';
 
 export type FormData = {
   name: string;
@@ -102,12 +103,7 @@ export const useVoiceAgent = () => {
     }
 
     setConnectionStatus('connecting');
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || '';
-    if (!wsUrl) {
-      console.error('NEXT_PUBLIC_WS_URL is not set in Frontend/.env!');
-      setConnectionStatus('disconnected');
-      return;
-    }
+    const wsUrl = getWebSocketUrl();
     const ws = new WebSocket(wsUrl);
     
     ws.onopen = () => {

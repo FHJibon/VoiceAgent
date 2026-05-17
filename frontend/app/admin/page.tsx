@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { getApiUrl as getApiUrlHelper } from '../../utils/config';
 
 type User = {
   id: number;
@@ -18,12 +19,7 @@ export default function AdminPage() {
   const [search, setSearch] = useState('');
 
   const getApiUrl = () => {
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || '';
-    if (!wsUrl) {
-      console.error('NEXT_PUBLIC_WS_URL is not set in Frontend/.env!');
-      return '';
-    }
-    return wsUrl.replace('ws://', 'http://').replace('wss://', 'https://').replace('/ws', '');
+    return getApiUrlHelper();
   };
 
   const fetchWithAuth = useCallback(async (endpoint: string, method: string = 'GET') => {

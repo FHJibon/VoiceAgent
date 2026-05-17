@@ -104,7 +104,7 @@ export const useVoiceAgent = () => {
     setConnectionStatus('connecting');
     const wsUrl = process.env.NEXT_PUBLIC_WS_URL || '';
     if (!wsUrl) {
-      console.error('NEXT_PUBLIC_WS_URL is not set in frontend/.env!');
+      console.error('NEXT_PUBLIC_WS_URL is not set in Frontend/.env!');
       setConnectionStatus('disconnected');
       return;
     }

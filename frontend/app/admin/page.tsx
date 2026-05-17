@@ -20,7 +20,7 @@ export default function AdminPage() {
   const getApiUrl = () => {
     const wsUrl = process.env.NEXT_PUBLIC_WS_URL || '';
     if (!wsUrl) {
-      console.error('NEXT_PUBLIC_WS_URL is not set in frontend/.env!');
+      console.error('NEXT_PUBLIC_WS_URL is not set in Frontend/.env!');
       return '';
     }
     return wsUrl.replace('ws://', 'http://').replace('wss://', 'https://').replace('/ws', '');

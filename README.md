@@ -3,7 +3,7 @@
 
 ### 1. Set environment variable
 
-Create a `backend/.env` file and set all of those:
+Create a `Backend/.env` file and set all of those:
 
 ```env
 GEMINI_API_KEY=
@@ -20,7 +20,7 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-Create a `frontend/.env` file and set all of those:
+Create a `Frontend/.env` file and set all of those:
 
 ```env
 NEXT_PUBLIC_WS_URL=
@@ -38,4 +38,4 @@ docker compose up --build -d
 docker compose down
 ```
 
-**Admin : http://127.0.0.1:3000/admin**  
+**Admin : localhost:3000/admin**  

@@ -33,16 +33,18 @@ export const getWebSocketUrl = (): string => {
         return storedUrl;
       }
     } catch (e) { }
-    if (envUrl && !envUrl.includes('localhost')) {
+    // Always use the env var if explicitly set (even if it points to localhost for local dev)
+    if (envUrl) {
       return envUrl;
     }
+    // Fallback: auto-detect from current page's hostname
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.hostname;
     const isIpOrLocalhost = host === 'localhost' || host === '127.0.0.1';
     if (isIpOrLocalhost) {
       return `${protocol}//${host}:8000/ws`;
     }
-    return `${protocol}//${host}/ws`;
+    return `${protocol}//${host}:8000/ws`;
   }
   return envUrl || 'ws://localhost:8000/ws';
 };

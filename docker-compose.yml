@@ -34,6 +34,8 @@ services:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_WS_URL=wss://apiform.optovex.com/ws
     image: fhjibon/voiceagent-frontend:latest
     container_name: voiceagent-frontend
     env_file:
